@@ -18,6 +18,8 @@ struct Song
 };
 
 void save_text(Song song);
+void delete_text(Song song);
+void reading_text(Song song);
 
 int main()
 {
@@ -41,10 +43,12 @@ int main()
     case 1:
         break;
     case 2:
+        delete_text(song);
         break;
     case 3:
         break;
     case 4:
+        reading_text(song);
         break;
     case 5:
         save_text(song);
@@ -52,6 +56,9 @@ int main()
     case 6:
         break;
     case 7:
+        break;
+    default:
+        cout << "Такого варианта нет! " << endl;
         break;
     }
 }
@@ -70,7 +77,7 @@ void save_text(Song song)
         cout << text_song << endl;
         if (text_song == "~")
         {
-            cout << "ERROR" << endl;
+            cout << "Программа завершена!" << endl;
             break;
         }
         else
@@ -79,4 +86,26 @@ void save_text(Song song)
         }
     }
     out.close();
+}
+
+void delete_text(Song song)
+{
+    ofstream out;
+    out.open("Song.txt", ios::trunc);
+    getchar();
+}
+
+void reading_text(Song song)
+{
+    string line;
+
+    ifstream in("Song.txt");
+    if (in.is_open())
+    {
+        while (getline(in, line))
+        {
+            cout << line << std::endl;
+        }
+    }
+    in.close();
 }
